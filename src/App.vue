@@ -1,11 +1,25 @@
 <script setup>
 import { RouterView } from 'vue-router';
+import NavBarTest from './components/NavBarTest.vue'
+import SideTest from './components/SideTest.vue'
 </script>
 
 <template>
   <div class=box>
     <div class="headerbox">
       <img alt="ColinLab logo" class="logo" src="@/assets/logo.svg" />
+      {{ myname }}
+      <input type="text" v-model="mytext"/>
+      {{ this.mytext }}
+      <ul>
+        <li v-for="data in datalist" :key="data">
+        {{ data }}</li>
+      </ul>
+      <button @click="handleAdd">ADD</button>
+      <NavBarTest myname="home" :myright="true" @event="handleEvent">
+      <div>TEST</div>
+    </NavBarTest>
+    <SideTest v-show="isShow"></SideTest>
     </div>
       <div class="mainbox">
         <RouterView/>
@@ -17,19 +31,32 @@ import { RouterView } from 'vue-router';
 export default{
   data(){
     return{
-
+      myname:'Colin', 
+      mytext:'',
+      datalist:[],
+      isShow:true
     }
   },
   components:{
-
-  },
+    NavBarTest,
+    SideTest
+},
   computed:{
 
   },
   props:{
 
   },
-  Methods:{
+  methods:{
+    handleAdd(){
+      console.log(this.mytext)
+      this.datalist.push(this.mytext)
+    },
+    handleEvent(){
+      this.isShow =! this.isShow
+    }
+  },
+  watch:{
 
   },
 }

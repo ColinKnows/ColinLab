@@ -18,28 +18,6 @@
                         <div class="coinprice">$23781.51</div>
                     </div>
                 </div>
-                <div class="detail">
-                    <img src="public/eth.svg">
-                    <div class="Transacations">
-                        <div class="fullname">Ethereum</div>
-                        <div class="name">ETH</div>
-                    </div>
-                    <div class="price">
-                        <div class="percent">+1.95%</div>
-                        <div class="coinprice">$1653.38</div>
-                    </div>
-                </div>
-                <div class="detail">
-                    <img src="public/bnb.svg">
-                    <div class="Transacations">
-                        <div class="fullname">BNB</div>
-                        <div class="name">BNB</div>
-                    </div>
-                    <div class="price">
-                        <div class="percent">+0.21%</div>
-                        <div class="coinprice">$304.52</div>
-                    </div>
-                </div>
             </van-tab>
             <van-tab title="NFTs">
                 <van-empty/>
@@ -97,6 +75,27 @@
     padding: 1.2rem;
 }
 
-
-
 </style>
+
+<script>
+export default{
+  data(){
+    return{
+
+    }
+  },
+  components:{
+
+  },
+  computed:{
+
+  },
+  props:{
+
+  },
+  Methods:{
+
+  },
+}
+
+</script>
