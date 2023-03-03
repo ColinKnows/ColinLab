@@ -10,7 +10,6 @@ import TransacationsDetail from '../components/TransacationsDetail.vue';
   <div>
     <NavBar/>
     <MainBody>
-      <h2>Transacations</h2>
       <TransacationsDetail/>
     </MainBody>
     <Tabbar/>

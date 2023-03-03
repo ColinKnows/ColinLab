@@ -3,7 +3,7 @@
 
 <template>
   <div>
-    <van-tabbar route  active-color="black" v-model="active">
+    <van-tabbar route  active-color="#1A1F84" inactive-color="#1A1F84" v-model="active">
       <van-tabbar-item replace to="/home" icon="chart-trending-o">Home</van-tabbar-item>
       <van-tabbar-item replace to="/Assets" icon="card">Assets</van-tabbar-item>
       <van-tabbar-item replace to="/Transacations" icon="todo-list">Transacations</van-tabbar-item>

@@ -13,6 +13,11 @@
 .MainBody{
   height: calc(75vh - 96px);
   padding: 1.2rem;
+  overflow:scroll
+}
+
+::-webkit-scrollbar{
+    display:none;
 }
 
 </style>

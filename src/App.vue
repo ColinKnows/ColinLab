@@ -2,6 +2,7 @@
 import { RouterView } from 'vue-router';
 import NavBarTest from './components/NavBarTest.vue'
 import SideTest from './components/SideTest.vue'
+import TabbarTest from './components/TabbarTest.vue';
 </script>
 
 <template>
@@ -20,6 +21,10 @@ import SideTest from './components/SideTest.vue'
       <div>TEST</div>
     </NavBarTest>
     <SideTest v-show="isShow"></SideTest>
+    <div v-hello>v-hellow</div>
+    <img :src="imgUrl"/>
+    <!-- <TabbarTest/> -->
+    {{ this.$route.name}}
     </div>
       <div class="mainbox">
         <RouterView/>
@@ -34,12 +39,14 @@ export default{
       myname:'Colin', 
       mytext:'',
       datalist:[],
-      isShow:true
+      isShow:true,
+      // imgUrl:"https://static.coinpaprika.com/coin/btc-bitcoin/logo.png",
     }
   },
   components:{
     NavBarTest,
-    SideTest
+    SideTest,
+    TabbarTest
 },
   computed:{
 
@@ -59,6 +66,13 @@ export default{
   watch:{
 
   },
+  directives: {
+      hello: {
+        mounted(el,binding) {
+        el.style.border=".1rem solid"
+      }
+      }
+    },
 }
 
 </script>
