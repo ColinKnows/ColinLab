@@ -9,7 +9,9 @@ import TabbarTest from './components/TabbarTest.vue';
   <div class=box>
     <div class="headerbox">
       <img alt="ColinLab logo" class="logo" src="@/assets/logo.svg" />
-      {{ myname }}
+      <div>Base on Vue 3</div>
+      <div>Powered by Coin Gecko & Vant</div>
+      <!-- {{ myname }}
       <input type="text" v-model="mytext"/>
       {{ this.mytext }}
       <ul>
@@ -23,8 +25,7 @@ import TabbarTest from './components/TabbarTest.vue';
     <SideTest v-show="isShow"></SideTest>
     <div v-hello>v-hellow</div>
     <img :src="imgUrl"/>
-    <!-- <TabbarTest/> -->
-    {{ this.$route.name}}
+    <TabbarTest/> -->
     </div>
       <div class="mainbox">
         <RouterView/>

@@ -7,38 +7,94 @@ import axios from "axios"
     <div class="HomeDetail">
         <van-tabs v-model:active="active" shrink>
             <van-tab title="Crypto" class="CryptoList">
-                <div class="detail" v-for="data in datalist.slice(0, 500)" :key="data.id">
-                    <div></div>
-                    <img :src="show?`https://static.coinpaprika.com/coin/${data.id}/logo.png`:''" :onerror="defaultImg"/>
-                    <div class="Transacations">
-                        <div class="fullname">{{data.name}}</div>
-                        <div class="name">{{data.symbol}}</div>
-                    </div>
-                    <div class="price">
-                        <div class="percent">+2.13%</div>
-                        <div class="coinprice">$23781.51</div>
-                    </div>
-                </div>
+                <van-list v-model:loading="loading" :finished="finished" finished-text="---Nothing---" @load=onload :immediate-check="false">
+                    <li class="detail" v-for="data in datalist" :key="data.id">
+                        <img :src="data.image" :onerror="defaultImg"/>
+                        <div class="Transacations">
+                            <div class="fullname">{{data.name}}</div>
+                            <div class="name">{{data.symbol}}</div>
+                        </div>
+                        <div class="price">
+                            <div :class="data.price_change_percentage_24h>0?'percentGreen':'percentRed'">{{parseFloat(data.price_change_percentage_24h).toFixed(2).concat('%')}}</div>
+                            <div class="coinprice">{{"$"+data.current_price}}</div>
+                        </div>
+                    </li>
+                </van-list>
             </van-tab>
-            <van-tab title="Exchange" class="CryptoList">
-                <div class="detail" v-for="data in datalist.slice(0, 500)" :key="data.id">
-                    <div></div>
-                    <img :src="show?`https://static.coinpaprika.com/coin/${data.id}/logo.png`:''">
-                    <div class="Transacations">
-                        <div class="fullname">{{data.name}}</div>
-                        <div class="name">{{data.symbol}}</div>
-                    </div>
-                    <div class="price">
-                        <div class="percent">+2.13%</div>
-                        <div class="coinprice">$23781.51</div>
-                    </div>
-                </div>
+            <van-tab title="Trending" class="CryptoList">
+                <ul>
+                    <li class="detail" v-for="item in Trending" :key="item.item.id">
+                        <img :src="item.item.small" :onerror="defaultImg"/>
+                        <div class="Transacations">
+                            <div class="fullname">{{item.item.name}}</div>
+                            <div class="name">{{item.item.symbol}}</div>
+                        </div>
+                        <div class="TrendingPrice" >
+                            {{parseFloat(item.item.price_btc).toFixed(5).concat('BTC')}}
+                        </div>
+                    </li>
+                </ul>
             </van-tab>
         </van-tabs>
     </div>
 </template>
 
+<script>
+
+
+export default{
+  data(){
+    return{
+        datalist:[],
+        Trending:[],
+        loading:false,
+        finished:false,
+        current:1,
+    }
+  },
+  mounted(){
+        axios.get("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=30&page=1&sparkline=true")
+        .then(res=>{
+            this.datalist=res.data
+        }),
+        axios.get("https://api.coingecko.com/api/v3/search/trending")
+        .then(res=>{
+            this.Trending=res.data.coins
+        })
+  },
+  components:{
+  },
+  computed: {
+        defaultImg () {
+            return 'this.src="' + ('public/coin.png') + '"';
+        }
+    },
+  props:{
+
+  },
+  methods:{
+    onload(){
+        this.current++
+        axios.get(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10&page=${this.current}&sparkline=true`)
+        .then(res=>{
+            this.datalist=[...this.datalist,...res.data]
+            this.loading=false
+        })
+    },
+  },
+  
+}
+
+</script>
+
 <style scoped>
+
+.TrendingPrice{
+    font-size: .5rem;
+    margin-left:0;
+    align-self: center;
+    font-weight: 500;
+}
 
 .detail{
     display: flex;
@@ -48,7 +104,9 @@ import axios from "axios"
 
 
 .detail img{
-    width: 2rem;
+    width: 2.2rem;
+    height: 2.2rem;
+    align-self: center;
 }
 
 
@@ -77,10 +135,16 @@ import axios from "axios"
     text-align: end;
 }
 
-.percent{
+.percentRed{
     font-size: .5rem;
     margin-right:0;
-    color: green;
+    color: red;
+}
+
+.percentGreen{
+    font-size: .5rem;
+    margin-right:0;
+    color:green;
 }
 
 .coinprice{
@@ -94,41 +158,3 @@ import axios from "axios"
 
 </style>
 
-<script>
-
-
-export default{
-  data(){
-    return{
-        datalist:[],
-        show:true
-    }
-  },
-  mounted(){
-        axios.get("/coin.json")
-        .then(res=>{
-            // console.log(res.data)
-            this.datalist=res.data
-        })
-        // axios.get(`https://api.coinpaprika.com/v1/coins/${this.datalist.id}/ohlcv/today`)
-        // .then(res=>{
-        //     console.log(res.data)
-        //     this.pricelist=res.data
-        // })
-  },
-  components:{
-  },
-  computed: {
-        defaultImg () {
-            return 'this.src="' + ('public/coin.png') + '"';
-        }
-    },
-  props:{
-
-  },
-  Methods:{
-  },
-  
-}
-
-</script>

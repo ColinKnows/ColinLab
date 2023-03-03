@@ -8,27 +8,11 @@
         <van-tabs v-model:active="active">
             <van-tab title="Crypto" class="CryptoList">
                 <div class="detail">
-                    <img src="public/btc.svg">
+                    <img src="https://static.coinpaprika.com/coin/btc-bitcoin/logo.png">
                     <p>BTC</p>
                     <div class="price">
                         <div class="usd">US$8,200.30</div>
                         <div class="coin">3.67BTC</div>
-                    </div>
-                </div>
-                <div class="detail">
-                    <img src="public/eth.svg">
-                    <p>ETH</p>
-                    <div class="price">
-                        <div class="usd">US$8,200.30</div>
-                        <div class="coin">3.67ETH</div>
-                    </div>
-                </div>
-                <div class="detail">
-                    <img src="public/bnb.svg">
-                    <p>BNB</p>
-                    <div class="price">
-                        <div class="usd">US$8,200.30</div>
-                        <div class="coin">3.67BNB</div>
                     </div>
                 </div>
             </van-tab>
@@ -47,7 +31,9 @@
 }
 
 .detail img{
-    width: 2rem;
+    width: 1.7rem;
+    height: 1.7rem;
+    align-self: center
 }
 
 
