@@ -49,18 +49,21 @@ export default{
     qr(){
       showToast({
         message: 'I’m happy for your joy! ',
+        wordBreak:'break-word',
         icon: 'star',
       })
    },
    scan(){
       showToast({
         message: 'May the force be with you',
+        wordBreak:'break-word',
         icon: 'gem',
       })
    },
    gift(){
       showToast({
         message: 'Wishing you all the best!',
+        wordBreak:'break-word',
         icon: 'gift',
       })
    }

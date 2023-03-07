@@ -7,7 +7,7 @@ import { RouterView } from 'vue-router';
     <div class="headerbox">
       <h1>ColinLab</h1>
       <h2>Crypto Demo APP</h2>
-      <h3 >Base on Vue</h3>
+      <h3 >Based on Vue</h3>
       <h4 >Powered by Coin Gecko & OpenSea</h4>
     </div>
       <div class="mainbox">
