@@ -3,11 +3,10 @@
 
 <template>
   <div>
-    <van-tabbar route  active-color="#1A1F84" inactive-color="#1A1F84" v-model="active">
-      <van-tabbar-item replace to="/home" icon="chart-trending-o">Home</van-tabbar-item>
+    <van-tabbar route  active-color="#1A1F84" inactive-color="grey" v-model=active>
+      <van-tabbar-item replace to="/Home" icon="wap-home">Home</van-tabbar-item>
       <van-tabbar-item replace to="/Assets" icon="card">Assets</van-tabbar-item>
-      <van-tabbar-item replace to="/Transacations" icon="todo-list">Transacations</van-tabbar-item>
-      <van-tabbar-item replace to="/News" icon="newspaper-o">News</van-tabbar-item>
+      <van-tabbar-item replace to="/Web3" icon="diamond">Web3</van-tabbar-item>
     </van-tabbar>
   </div>
 </template>
@@ -17,11 +16,9 @@
 export default{
   data(){
     return{
+      active:true
     }
   },
-  props:{
-    dot:true
-  }
 }
 
 
@@ -30,7 +27,15 @@ export default{
 
 <style scoped>
 
-div{
-  position: relative;
+.van-tabbar-item {
+
 }
+
+@media screen and (min-width: 576px) {
+  div{
+    position:relative
+  }
+
+}
+
 </style>

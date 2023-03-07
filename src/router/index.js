@@ -1,47 +1,35 @@
 import { createRouter, createWebHistory,} from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import AssetsView from '../views/AssetsView.vue'
+import Web3View from '../views/Web3View.vue'
+import Detail from '../components/Detail.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/',
-      redirect:'/home'
+      redirect:'/Home'
     },
     {
-      path: '/home',
+      path: '/Home',
       name: 'Home',
       component: HomeView,
-      // children:[
-      // {
-      //   path: '/home',
-      //   name: 'home',
-      //   component: HomeView
-      // },
-      // {
-      //   path: '/',
-      //   redirect:'/home'
-      // }]
     },
     {
-      path: '/detail',
-      name: 'detail',
-      component: () => import('../components/Detail.vue')
+      path: '/Detail/:id/:num',
+      name: 'Detail',
+      component:Detail,
     },
     {
-      path: '/assets',
+      path: '/Assets',
       name: 'Assets',
-      component: () => import('../views/AssetsView.vue')
+      component: AssetsView,
     },
     {
-      path: '/news',
-      name: 'News',
-      component: () => import('../views/NewsView.vue')
-    },
-    {
-      path: '/transacations',
-      name: 'Transacations',
-      component: () => import('../views/TransacationsView.vue')
+      path: '/Web3',
+      name: 'Web3',
+      component: Web3View,
     },
   ]
 })

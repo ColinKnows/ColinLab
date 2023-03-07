@@ -1,31 +1,14 @@
 <script setup>
 import { RouterView } from 'vue-router';
-import NavBarTest from './components/NavBarTest.vue'
-import SideTest from './components/SideTest.vue'
-import TabbarTest from './components/TabbarTest.vue';
 </script>
 
 <template>
-  <div class=box>
+  <div class=container>
     <div class="headerbox">
-      <img alt="ColinLab logo" class="logo" src="@/assets/logo.svg" />
-      <div>Base on Vue 3</div>
-      <div>Powered by Coin Gecko & Vant</div>
-      <!-- {{ myname }}
-      <input type="text" v-model="mytext"/>
-      {{ this.mytext }}
-      <ul>
-        <li v-for="data in datalist" :key="data">
-        {{ data }}</li>
-      </ul>
-      <button @click="handleAdd">ADD</button>
-      <NavBarTest myname="home" :myright="true" @event="handleEvent">
-      <div>TEST</div>
-    </NavBarTest>
-    <SideTest v-show="isShow"></SideTest>
-    <div v-hello>v-hellow</div>
-    <img :src="imgUrl"/>
-    <TabbarTest/> -->
+      <h1>ColinLab</h1>
+      <h2>Crypto Demo APP</h2>
+      <h3 >Base on Vue</h3>
+      <h4 >Powered by Coin Gecko & OpenSea</h4>
     </div>
       <div class="mainbox">
         <RouterView/>
@@ -37,55 +20,56 @@ import TabbarTest from './components/TabbarTest.vue';
 export default{
   data(){
     return{
-      myname:'Colin', 
-      mytext:'',
-      datalist:[],
-      isShow:true,
-      // imgUrl:"https://static.coinpaprika.com/coin/btc-bitcoin/logo.png",
     }
   },
-  components:{
-    NavBarTest,
-    SideTest,
-    TabbarTest
-},
-  computed:{
-
-  },
-  props:{
-
-  },
-  methods:{
-    handleAdd(){
-      console.log(this.mytext)
-      this.datalist.push(this.mytext)
-    },
-    handleEvent(){
-      this.isShow =! this.isShow
-    }
-  },
-  watch:{
-
-  },
-  directives: {
-      hello: {
-        mounted(el,binding) {
-        el.style.border=".1rem solid"
-      }
-      }
-    },
 }
 
 </script>
 
 <style scoped>
 
-.box{
+h3{
+  font-weight: bolder;
+  font-size: 1.3rem;
+  text-align: center;
+}
+
+h4{
+  font-weight: bolder;
+  font-size: .6rem;
+  text-align: center;
+}
+
+h2{
+  font-weight: bolder;
+  font-size: 2rem;
+  background:linear-gradient( 135deg, #0D25B9 10%, #FD6585 100%);
+  -webkit-background-clip: text;
+  color: transparent;
+  margin-bottom: .5rem;
+  text-align: center;
+}
+
+h1{
+  font-weight: bolder;
+  font-size: 5rem;
+  line-height: 5rem;
+  background:linear-gradient( 135deg, #FD6585 10%, #0D25B9 100%);
+  -webkit-background-clip: text;
+  color: transparent;
+  text-align: center;
+}
+
+.title{
+  font-weight: bolder;
+  font-size: 1.5rem;
+  text-align: center;
+
+}
+.container{
   display: flex;
-  max-width:100vw
 }
 .mainbox{
-  width: 45vh;
   height: 75vh;
   margin: 10vh;
   background-color: white;
@@ -99,83 +83,18 @@ export default{
   max-width:35vw;
   align-items: center;
 }
-.logo{
-  width: 80%;
-  animation: bounce;
+
+
+@media (max-width: 576px) {
+  .headerbox {
+    display: none
+  }
+
+  .mainbox{
+    height: 100vh;
+    widows: 100vw;
+    margin: 0;
+  }
 }
-
-
 
 </style>
-
-      <!-- <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav> -->
-
-      <!-- <RouterView /> -->
-
-<!-- <style scoped>
-header {
-  display: none;
-  line-height: 1.5;
-  max-height: 100vh;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto;
-}
-
-nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
-}
-
-nav a.router-link-exact-active {
-  color: var(--color-text);
-}
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    /* margin: 0 2rem 0 0; */
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
-}
-</style> -->

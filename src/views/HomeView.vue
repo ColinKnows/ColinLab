@@ -16,3 +16,6 @@ import HomeDetail from '../components/HomeDetail.vue'
     <Tabbar/>
 </template>
 
+<style>
+
+</style>

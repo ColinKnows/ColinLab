@@ -1,11 +1,12 @@
 <script setup>
 import axios from "axios"
+import { showLoadingToast,closeToast,showDialog} from "vant"
 </script>
 
 
 <template>
     <div class="HomeDetail">
-        <van-tabs v-model:active="active" shrink>
+        <van-tabs v-model:active=active shrink>
             <van-tab title="Crypto" class="CryptoList">
                 <van-list v-model:loading="loading" :finished="finished" finished-text="---Nothing---" @load=onload :immediate-check="false">
                     <li class="detail" v-for="data in datalist" :key="data.id">
@@ -30,7 +31,7 @@ import axios from "axios"
                             <div class="name">{{item.item.symbol}}</div>
                         </div>
                         <div class="TrendingPrice" >
-                            {{parseFloat(item.item.price_btc).toFixed(5).concat('BTC')}}
+                            {{parseFloat(item.item.price_btc).toFixed(7).concat('BTC')}}
                         </div>
                     </li>
                 </ul>
@@ -50,17 +51,44 @@ export default{
         loading:false,
         finished:false,
         current:1,
+        active:true,
     }
   },
   mounted(){
-        axios.get("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=30&page=1&sparkline=true")
+    
+  },
+  created(){
+    axios.get("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=20&page=1&sparkline=true")
         .then(res=>{
             this.datalist=res.data
-        }),
-        axios.get("https://api.coingecko.com/api/v3/search/trending")
+        });
+    axios.get("https://api.coingecko.com/api/v3/search/trending")
         .then(res=>{
             this.Trending=res.data.coins
-        })
+        });
+        axios.interceptors.request.use(function (config) {
+      showLoadingToast({
+            message: 'Loading...',
+            forbidClick: true,
+            duration:0,
+            });
+            return config;
+        }, function (error) {
+            return Promise.reject(error);
+        }),
+        axios.interceptors.response.use(function (response) {
+            closeToast()
+            return response;
+        }, function (error) {
+            closeToast()
+            showDialog({ 
+                  message: 'We are using CoinGecko free API.\nToo many request now,\n it would be fine in 1 min later',
+                  theme:'round-button',
+                  confirmButtonColor:'#1A1F84',
+                  closeOnClickOverlay:true,
+                });
+            return Promise.reject(error);
+        });
   },
   components:{
   },
@@ -69,9 +97,6 @@ export default{
             return 'this.src="' + ('public/coin.png') + '"';
         }
     },
-  props:{
-
-  },
   methods:{
     onload(){
         this.current++
@@ -89,8 +114,14 @@ export default{
 
 <style scoped>
 
+
+.van-tab{
+    font-size: 900;
+    font-weight: bold;
+
+}
 .TrendingPrice{
-    font-size: .5rem;
+    font-size: .8rem;
     margin-left:0;
     align-self: center;
     font-weight: 500;
@@ -122,11 +153,11 @@ export default{
 }
 
 .fullname{
-    font-size: .5rem;
+    font-size: 1rem;
 }
 
 .name{
-    font-size: .5rem;
+    font-size: 1rem;
 }
 .price{
     display: flex;
@@ -136,25 +167,64 @@ export default{
 }
 
 .percentRed{
-    font-size: .5rem;
+    font-size: 1rem;
     margin-right:0;
     color: red;
+    font-weight: 600;
+
 }
 
 .percentGreen{
-    font-size: .5rem;
+    font-size: 1rem;
     margin-right:0;
     color:green;
+    font-weight: 600;
 }
 
 .coinprice{
-    font-size: .5rem;
-    margin-left:0
+    font-size: 1rem;
 }
 
 .CryptoList{
-    padding: 1.2rem;
+    padding: 1.2rem 1rem;
 }
+
+@media (max-width: 576px) {
+.fullname{
+    font-size: 1rem;    
+}
+
+.name{
+    font-size: 1rem;
+}
+
+.coinprice{
+    font-size: 1rem;
+}
+
+.percentGreen{
+    font-size: 1rem;
+    margin-right:0;
+    color:green;
+    font-weight: 600;
+}
+
+.percentRed{
+    font-size: 1rem;
+    margin-right:0;
+    color: red;
+    font-weight: 600;
+
+}
+
+.detail img{
+    width: 2.7rem;
+    height: 2.7rem;
+    align-self: center;
+}
+
+}
+
 
 </style>
 

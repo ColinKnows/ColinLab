@@ -4,7 +4,11 @@
     <div class="gap"></div>
     <div class="icon" @click="scan"><van-icon name="scan" size="1.6rem" /></div>
     <div class="icon" @click="qr"><van-icon name="qr" size="1.6rem" /></div>
-    <div class="icon" @click="gift"><van-icon name="point-gift-o" size="1.6rem" /></div>   
+    <div class="icon" @click="gift">
+      <van-badge :dot="isDot" @click="isDot=false">
+     <van-icon name="point-gift-o" size="1.6rem" />
+    </van-badge>
+  </div>
   </div>
 </template>
 
@@ -38,13 +42,13 @@ import { showToast} from 'vant';
 export default{
   data(){
     return{
-        
+        isDot:true
     }
   },
   methods:{
     qr(){
       showToast({
-        message: 'Wishing you all the best!',
+        message: 'I’m happy for your joy! ',
         icon: 'star',
       })
    },
@@ -56,7 +60,7 @@ export default{
    },
    gift(){
       showToast({
-        message: 'I’m happy for your joy! ',
+        message: 'Wishing you all the best!',
         icon: 'gift',
       })
    }

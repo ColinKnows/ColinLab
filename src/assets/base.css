@@ -70,7 +70,8 @@
 
 body {
   min-height: 100vh;
-  color: var(--color-text);
+  color: black;
+  /* color: var(--color-text); */
   /* background: var(--color-background); */
   background-image: linear-gradient(to top, #fbc2eb 0%, #a6c1ee 100%);
   transition: color 0.5s, background-color 0.5s;
